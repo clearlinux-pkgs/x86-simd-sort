@@ -7,12 +7,13 @@
 #
 Name     : x86-simd-sort
 Version  : 4.0.rc
-Release  : 1
+Release  : 2
 URL      : https://github.com/intel/x86-simd-sort/archive/refs/tags/4.0.rc.tar.gz
 Source0  : https://github.com/intel/x86-simd-sort/archive/refs/tags/4.0.rc.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause
+Requires: x86-simd-sort-lib = %{version}-%{release}
 Requires: x86-simd-sort-license = %{version}-%{release}
 BuildRequires : buildreq-meson
 # Suppress stripping binaries
@@ -32,11 +33,21 @@ relative to std::sort. The following API's are currently supported:
 %package dev
 Summary: dev components for the x86-simd-sort package.
 Group: Development
+Requires: x86-simd-sort-lib = %{version}-%{release}
 Provides: x86-simd-sort-devel = %{version}-%{release}
 Requires: x86-simd-sort = %{version}-%{release}
 
 %description dev
 dev components for the x86-simd-sort package.
+
+
+%package lib
+Summary: lib components for the x86-simd-sort package.
+Group: Libraries
+Requires: x86-simd-sort-license = %{version}-%{release}
+
+%description lib
+lib components for the x86-simd-sort package.
 
 
 %package license
@@ -56,7 +67,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1698343702
+export SOURCE_DATE_EPOCH=1698355801
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -108,6 +119,10 @@ DESTDIR=%{buildroot} ninja -C builddir install
 /usr/include/x86simdsort.h
 /usr/lib64/libx86simdsort.so
 /usr/lib64/pkgconfig/x86simdsort.pc
+
+%files lib
+%defattr(-,root,root,-)
+/usr/lib64/libx86simdsort.so.0
 
 %files license
 %defattr(0644,root,root,0755)
