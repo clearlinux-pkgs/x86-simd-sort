@@ -6,10 +6,10 @@
 # autospec commit: 250a666
 #
 Name     : x86-simd-sort
-Version  : 4.0.rc
-Release  : 2
-URL      : https://github.com/intel/x86-simd-sort/archive/refs/tags/4.0.rc.tar.gz
-Source0  : https://github.com/intel/x86-simd-sort/archive/refs/tags/4.0.rc.tar.gz
+Version  : 4.0
+Release  : 3
+URL      : https://github.com/intel/x86-simd-sort/archive/refs/tags/v4.0.tar.gz
+Source0  : https://github.com/intel/x86-simd-sort/archive/refs/tags/v4.0.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause
@@ -22,13 +22,12 @@ BuildRequires : buildreq-meson
 
 %description
 # x86-simd-sort
-C++ header file library for SIMD based 16-bit, 32-bit and 64-bit data type
-sorting algorithms on x86 processors. Source header files are available in src
-directory.  We currently only have AVX-512 based implementation of quicksort,
-argsort, quickselect, paritalsort and key-value sort. This repository also
-includes a test suite which can be built and run to test the sorting algorithms
-for correctness. It also has benchmarking code to compare its performance
-relative to std::sort. The following API's are currently supported:
+C++ template library for high performance SIMD based sorting routines for
+16-bit, 32-bit and 64-bit data types. The sorting routines are accelerated
+using AVX-512/AVX2 when available. The library auto picks the best version
+depending on the processor it is run on. If you are looking for the AVX-512 or
+AVX2 specific implementations, please see
+`src/` directory. The following routines are currently supported:
 
 %package dev
 Summary: dev components for the x86-simd-sort package.
@@ -59,15 +58,15 @@ license components for the x86-simd-sort package.
 
 
 %prep
-%setup -q -n x86-simd-sort-4.0.rc
-cd %{_builddir}/x86-simd-sort-4.0.rc
+%setup -q -n x86-simd-sort-4.0
+cd %{_builddir}/x86-simd-sort-4.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1698355801
+export SOURCE_DATE_EPOCH=1698699628
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -117,12 +116,12 @@ DESTDIR=%{buildroot} ninja -C builddir install
 %files dev
 %defattr(-,root,root,-)
 /usr/include/x86simdsort.h
-/usr/lib64/libx86simdsort.so
-/usr/lib64/pkgconfig/x86simdsort.pc
+/usr/lib64/libx86simdsortcpp.so
+/usr/lib64/pkgconfig/x86simdsortcpp.pc
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/libx86simdsort.so.0
+/usr/lib64/libx86simdsortcpp.so.0
 
 %files license
 %defattr(0644,root,root,0755)
