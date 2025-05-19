@@ -1,0 +1,8 @@
+libx86simdsortcpp.so.1:keyvalue_qsort_float_uint32
+libx86simdsortcpp.so.1:keyvalue_qsort_float_uint64
+libx86simdsortcpp.so.1:keyvalue_qsort_int32_uint32
+libx86simdsortcpp.so.1:keyvalue_qsort_int32_uint64
+libx86simdsortcpp.so.1:keyvalue_qsort_uint32_uint32
+libx86simdsortcpp.so.1:keyvalue_qsort_uint32_uint64
+libx86simdsortcpp.so.1:keyvalue_qsort_uint64_uint32
+libx86simdsortcpp.so.1:keyvalue_qsort_uint64_uint64
